@@ -59,7 +59,7 @@ function Task3() {
 
                       </div>
                       <img src={news.imageUrl}
-                        className='max-h-[300px] bg-contain'
+                        className='w-full max-h-[250px] object-cover'
                         alt={`${news.name}`} />
                       <p className='text-xl font-semibold my-5'>{news.title}</p>
                       <p className='text-[#333] py-3 border-b border-gray-400'>{news.content}</p>
