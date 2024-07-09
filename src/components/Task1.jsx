@@ -19,7 +19,7 @@ function Task1() {
                             <p className='text-[#333] py-3 border-b border-gray-400'>{movie.info}</p>
                             {
                                 movie.actor.map((actor, index) => (
-                                    <div>
+                                    <div key={index}>
                                         <p className='text-[#333] py-3 border-b border-gray-400'>{actor}</p>
                                     </div>
                                 ))

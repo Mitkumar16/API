@@ -50,7 +50,7 @@ function Task3() {
                         <p className=" flex gap-7 items-center m-2 ">
                           {
                             news.categoryNames.map((category, index) => (
-                              <div>
+                              <div key={index}>
                                 <p className='bg-green-600  text-white px-2 rounded-md'>{category}</p>
                               </div>
                             ))
