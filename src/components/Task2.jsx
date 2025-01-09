@@ -1,100 +1,81 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Loader from './Loader';
 
 function Task2() {
     const [datas, setDatas] = useState([]);
-    const [loading, setLoading] = useState(false)
-
+    const [loading, setLoading] = useState(false);
 
     const url = `https://dummyjson.com/users`;
 
     const fetchData = async () => {
-        setLoading(true)
-
+        setLoading(true);
         try {
-            const response = await fetch(`${url}`);
+            const response = await fetch(url);
             const result = await response.json();
-            setDatas(result.users)
-            console.log(result.users);
-
+            setDatas(result.users);
         } catch (error) {
-            console.log(error);
+            console.error('Error fetching data:', error);
         }
-        setLoading(false)
-    }
-
+        setLoading(false);
+    };
 
     useEffect(() => {
         fetchData();
-    }, [])
-
-    console.log(datas)
-
+    }, []);
 
     return (
-
-
-
-        <div className='w-full '>
-            <div className='w-full h-[300px] flex items-center justify-center text-5xl font-bold mb-16 text-white bg-black'>Task 2</div>
-
-            <div className='md:w-10/12 mx-auto max-w-[100%]'>
-            {
-                        loading ?
-                            (<Loader />) :
-               ( <table className='w-full overflow-x-auto object-cover'>
-                    <thead className='bg-black mx-auto '>
-                        <tr className='text-white font-semibold'>
-                            <td className='py-3 md:px-8 px-2'>
-                                SR NO
-                            </td>
-                            <td className='py-3 md:px-8'>
-                                FULL NAME
-                            </td>
-                            {/* <td>
-                            STATE-PROVINCE
-
-                        </td> */}
-                            <td className='py-3 md:px-8'>
-                                EMAIL
-                            </td>
-                            <td className='py-3 md:px-8'>
-                                MOBILE
-                            </td>
-                            <td className='py-3 md:px-8'>
-                                BOD
-                            </td>
-                            <td className='py-3 md:px-8'>
-                                UNIVERSITY
-                            </td>
-                        </tr>
-                    </thead>
-                   
-                            <tbody className=''>
-                                {
-                                    datas.map((data, index) =>
-                                    (
-                                        <tr key={index} className={`${index % 2 ? "bg-slate-300" : "bg-white"}`}>
-                                            <td className='py-3 md:px-8 px-2'>{index + 1}</td>
-                                            <td className='py-3 md:px-8'>{data.fistName}{data.lastName}</td>
-                                            <td className='py-3 md:px-8'>{data.email}</td>
-                                            <td className='py-3 md:px-8'>{data.phone}</td>
-                                            <td className='py-3 md:px-8'>{data.birthDate}</td>
-                                            <td className='py-3 md:px-8'>{data.university}</td>
-                                        </tr>
-                                    )
-
-
-                                    )
-                                }
-                            </tbody>
-                    
-                </table>)}
+        <div className="bg-gray-900 text-white min-h-screen">
+            {/* Header */}
+            <div className="w-full h-[300px] flex items-center justify-center text-5xl font-bold mb-16 bg-gradient-to-r from-gray-800 via-gray-700 to-black shadow-lg">
+                Task 2
             </div>
 
+            {/* Content */}
+            <div className="container mx-auto px-5">
+                {loading ? (
+                    <div className="flex items-center justify-center h-[200px]">
+                        <Loader />
+                    </div>
+                ) : datas.length > 0 ? (
+                    <div className="overflow-x-auto">
+                        <table className="w-full table-auto border-collapse border border-gray-700">
+                            <thead>
+                                <tr className="bg-black">
+                                    <th className="py-3 px-4 border border-gray-700">SR NO</th>
+                                    <th className="py-3 px-4 border border-gray-700">FULL NAME</th>
+                                    <th className="py-3 px-4 border border-gray-700">EMAIL</th>
+                                    <th className="py-3 px-4 border border-gray-700">MOBILE</th>
+                                    <th className="py-3 px-4 border border-gray-700">DOB</th>
+                                    <th className="py-3 px-4 border border-gray-700">UNIVERSITY</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {datas.map((data, index) => (
+                                    <tr
+                                        key={index}
+                                        className={`${
+                                            index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'
+                                        } hover:bg-gray-600 transition-colors`}
+                                    >
+                                        <td className="py-3 px-4 text-center">{index + 1}</td>
+                                        <td className="py-3 px-4">{`${data.firstName} ${data.lastName}`}</td>
+                                        <td className="py-3 px-4">{data.email}</td>
+                                        <td className="py-3 px-4">{data.phone}</td>
+                                        <td className="py-3 px-4">{data.birthDate}</td>
+                                        <td className="py-3 px-4">{data.university}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <div className="text-center py-10 text-gray-400">
+                        No data available. Please try again later.
+                    </div>
+                )}
+            </div>
         </div>
-    )
+    );
 }
 
-
-export default Task2
+export default Task2;
