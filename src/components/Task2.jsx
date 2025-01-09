@@ -6,7 +6,7 @@ function Task2() {
     const [loading, setLoading] = useState(false)
 
 
-    const url = `https://inshortsapi.vercel.app/news?category=sports`;
+    const url = `https://dummyjson.com/users`;
 
     const fetchData = async () => {
         setLoading(true)
@@ -14,8 +14,8 @@ function Task2() {
         try {
             const response = await fetch(`${url}`);
             const result = await response.json();
-            setDatas(result.data)
-            console.log(result.data);
+            setDatas(result.users)
+            console.log(result.users);
 
         } catch (error) {
             console.log(error);
@@ -42,24 +42,30 @@ function Task2() {
             {
                         loading ?
                             (<Loader />) :
-               ( <table className='w-full'>
+               ( <table className='w-full overflow-x-auto object-cover'>
                     <thead className='bg-black mx-auto '>
                         <tr className='text-white font-semibold'>
                             <td className='py-3 md:px-8 px-2'>
                                 SR NO
                             </td>
                             <td className='py-3 md:px-8'>
-                                NEWS TITLE
+                                FULL NAME
                             </td>
                             {/* <td>
                             STATE-PROVINCE
 
                         </td> */}
                             <td className='py-3 md:px-8'>
-                                AUTHOR
+                                EMAIL
                             </td>
                             <td className='py-3 md:px-8'>
-                                DATE & TIME
+                                MOBILE
+                            </td>
+                            <td className='py-3 md:px-8'>
+                                BOD
+                            </td>
+                            <td className='py-3 md:px-8'>
+                                UNIVERSITY
                             </td>
                         </tr>
                     </thead>
@@ -70,9 +76,11 @@ function Task2() {
                                     (
                                         <tr key={index} className={`${index % 2 ? "bg-slate-300" : "bg-white"}`}>
                                             <td className='py-3 md:px-8 px-2'>{index + 1}</td>
-                                            <td className='py-3 md:px-8'>{data.title}</td>
-                                            <td className='py-3 md:px-8'>{data.author}</td>
-                                            <td className='py-3 md:px-8'>{data.date}, {data.time}</td>
+                                            <td className='py-3 md:px-8'>{data.fistName}{data.lastName}</td>
+                                            <td className='py-3 md:px-8'>{data.email}</td>
+                                            <td className='py-3 md:px-8'>{data.phone}</td>
+                                            <td className='py-3 md:px-8'>{data.birthDate}</td>
+                                            <td className='py-3 md:px-8'>{data.university}</td>
                                         </tr>
                                     )
 
